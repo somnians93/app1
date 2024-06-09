@@ -1,17 +1,27 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-def index(request) -> HttpResponse:
+from goods.models import Categories
+
+
+def index(request):
+    
+    categories = Categories.objects.all()
+
     context = {
         'title': 'Home - Главная',
-        'content': 'Магазин мебели МебельHome',
+        'content': "Магазин мебели HOME",
+        'categories': categories
     }
+
     return render(request, 'main/index.html', context)
 
-def about(request) -> HttpResponse:
+
+def about(request):
     context = {
-        'title': 'МебельHome - О нас',
-        'content': 'О нас',
-        'text_on_page': 'У нас вы найдете все, что нужно для создания уюта и комфорта в вашем доме.'
+        'title': 'Home - О нас',
+        'content': "О нас",
+        'text_on_page': "Текст о том почему этот магазин такой классный, и какой хороший товар."
     }
+
     return render(request, 'main/about.html', context)
