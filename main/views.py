@@ -1,10 +1,11 @@
 from django.http import HttpResponse
+
 from django.shortcuts import render
 
 from goods.models import Categories
 
 
-def index(request):
+def index(request) -> HttpResponse:
     
     
     context = {
@@ -16,7 +17,7 @@ def index(request):
     return render(request, 'main/index.html', context)
 
 
-def about(request):
+def about(request) -> HttpResponse:
     context = {
         'title': 'Home - О нас',
         'content': "О нас",

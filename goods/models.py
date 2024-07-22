@@ -1,3 +1,4 @@
+from typing import Literal
 from django.db import models
 
 
@@ -6,12 +7,12 @@ class Categories(models.Model):
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name='URL')
 
     class Meta:
-        db_table = 'category'
-        verbose_name = 'Категорию'
-        verbose_name_plural = 'Категории'
+        db_table: str = 'category'
+        verbose_name: str = 'Категорию'
+        verbose_name_plural: str = 'Категории'
 
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 
@@ -28,20 +29,20 @@ class Products (models.Model):
 
 
     class Meta:
-        db_table = 'product'
-        verbose_name = 'Продукт'
-        verbose_name_plural = 'Продукты'
-        ordering = ("id",)
+        db_table: str = 'product'
+        verbose_name: str = 'Продукт'
+        verbose_name_plural: str = 'Продукты'
+        ordering: tuple[Literal['id']] = ("id",)
 
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'{self.name} Количество - {self.quantity}'
     
-    def display_id(self):
+    def display_id(self) -> str:
         return f"{self.id:05}"
     
 
-    def sell_price(self):
+    def sell_price(self):# -> Any:
         if self.discount:
             return round(self.price - self.price*self.discount/100, 2)
         
